@@ -18,7 +18,7 @@
         {{-- 6 Program Cards --}}
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
 
-            <div class="glass-card p-7 reveal-scale" data-delay="0" data-tilt>
+            <div id="pelatihan-wirausaha" class="glass-card p-7 reveal-scale" data-delay="0" data-tilt>
                 <div class="icon-circle mb-5">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M3 9l1.5-5h15L21 9M3 9v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9M9 21V13h6v8"/></svg>
                 </div>
@@ -32,7 +32,7 @@
                 </ul>
             </div>
 
-            <div class="glass-card p-7 reveal-scale" data-delay="80" data-tilt>
+            <div id="sekolah-kepala-desa" class="glass-card p-7 reveal-scale" data-delay="80" data-tilt>
                 <div class="icon-circle mb-5">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4 8 4v14M9 9h1M9 13h1M14 9h1M14 13h1M9 21v-4h6v4"/></svg>
                 </div>
@@ -46,7 +46,7 @@
                 </ul>
             </div>
 
-            <div class="glass-card p-7 reveal-scale" data-delay="160" data-tilt>
+            <div id="sekolah-kepala-dinas" class="glass-card p-7 reveal-scale" data-delay="160" data-tilt>
                 <div class="icon-circle mb-5">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 22v-4h6v4M9 6h1M14 6h1M9 10h1M14 10h1M9 14h1M14 14h1"/></svg>
                 </div>
@@ -60,7 +60,7 @@
                 </ul>
             </div>
 
-            <div class="glass-card p-7 reveal-scale" data-delay="240" data-tilt>
+            <div id="business-camp" class="glass-card p-7 reveal-scale" data-delay="240" data-tilt>
                 <div class="icon-circle mb-5">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10l-1 9a4 4 0 0 1-8 0L7 4ZM5 4h14M5 4a2 2 0 0 0-2 2c0 2 2 4 4 4M19 4a2 2 0 0 1 2 2c0 2-2 4-4 4"/></svg>
                 </div>
@@ -74,7 +74,7 @@
                 </ul>
             </div>
 
-            <div class="glass-card p-7 reveal-scale" data-delay="320" data-tilt>
+            <div id="pendampingan-umkm" class="glass-card p-7 reveal-scale" data-delay="320" data-tilt>
                 <div class="icon-circle mb-5">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
@@ -88,7 +88,7 @@
                 </ul>
             </div>
 
-            <div class="glass-card p-7 reveal-scale" data-delay="400" data-tilt>
+            <div id="ekonomi-daerah" class="glass-card p-7 reveal-scale" data-delay="400" data-tilt>
                 <div class="icon-circle mb-5">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 </div>

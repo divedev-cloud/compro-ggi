@@ -5,7 +5,19 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
+
+Route::get('/tentang-kami', function () {
+    return view('tentang-kami');
+})->name('about');
+
+Route::get('/program', function () {
+    return view('program');
+})->name('programs');
+
+Route::get('/kontak', function () {
+    return view('kontak');
+})->name('contact.page');
 
 Route::post('/contact', function (Request $request) {
     $request->validate([

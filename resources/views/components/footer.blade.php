@@ -3,7 +3,7 @@
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
 
             <div class="lg:col-span-2">
-                <a href="#home" class="inline-flex items-center gap-3 mb-5">
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-3 mb-5">
                     <img src="{{ asset('assets/logo.png') }}" alt="Logo GGI" class="h-10 w-auto" />
                     <span class="font-display font-700 text-ink-900 text-sm leading-tight">PT Gagasan Gemilang<br/>Indonesia</span>
                 </a>
@@ -20,11 +20,12 @@
             <div>
                 <h4 class="font-display font-600 text-ink-900 text-sm mb-5">Navigasi</h4>
                 <ul class="space-y-3 text-sm">
-                    <li><a href="#about" class="text-ink-500 hover:text-cyan-600 transition-colors">Tentang Kami</a></li>
-                    <li><a href="#services" class="text-ink-500 hover:text-cyan-600 transition-colors">Bidang Layanan</a></li>
-                    <li><a href="#team" class="text-ink-500 hover:text-cyan-600 transition-colors">Tim Ahli</a></li>
-                    <li><a href="#programs" class="text-ink-500 hover:text-cyan-600 transition-colors">Program Unggulan</a></li>
-                    <li><a href="#partners" class="text-ink-500 hover:text-cyan-600 transition-colors">Mitra &amp; Klien</a></li>
+                    <li><a href="{{ route('about') }}" class="text-ink-500 hover:text-cyan-600 transition-colors">Tentang Kami</a></li>
+                    <li><a href="{{ route('about') }}#visi-misi" class="text-ink-500 hover:text-cyan-600 transition-colors">Visi &amp; Misi</a></li>
+                    <li><a href="{{ route('about') }}#team" class="text-ink-500 hover:text-cyan-600 transition-colors">Tim Ahli</a></li>
+                    <li><a href="{{ route('programs') }}" class="text-ink-500 hover:text-cyan-600 transition-colors">Program Unggulan</a></li>
+                    <li><a href="{{ route('home') }}#partners" class="text-ink-500 hover:text-cyan-600 transition-colors">Mitra &amp; Klien</a></li>
+                    <li><a href="{{ route('contact.page') }}" class="text-ink-500 hover:text-cyan-600 transition-colors">Kontak</a></li>
                 </ul>
             </div>
 

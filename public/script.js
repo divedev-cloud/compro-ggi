@@ -157,8 +157,9 @@
   function initNavbar() {
     const nav = document.getElementById('navbar');
     if (!nav) return;
+    const isInnerPage = document.body.dataset.innerPage === 'true';
     const onScroll = () => {
-      if (window.scrollY > 40) nav.classList.add('scrolled');
+      if (isInnerPage || window.scrollY > 40) nav.classList.add('scrolled');
       else nav.classList.remove('scrolled');
     };
     onScroll();

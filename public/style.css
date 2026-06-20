@@ -3447,3 +3447,12 @@ button:focus-visible {
 .dark-panel .text-ink-400 {
   color: rgba(255,255,255,0.7) !important;
 }
+
+/* ===================================================================
+   Inner page hero — first section with fixed navbar offset
+=================================================================== */
+.inner-page-hero {
+  /* 5rem = navbar height (h-20), + 3rem content breathing room */
+  padding-top: 8rem;
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
