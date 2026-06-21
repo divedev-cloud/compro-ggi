@@ -119,6 +119,42 @@
                 {{-- Sidebar options --}}
                 <div class="space-y-5">
 
+                  {{-- Penulis --}}
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                        <h3 class="text-sm font-semibold text-slate-700 mb-3">Penulis</h3>
+                        <select id="author_id" name="author_id"
+                            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition bg-white">
+                            @foreach($users as $u)
+                            <option value="{{ $u->id }}" {{ old('author_id', auth()->id()) == $u->id ? 'selected' : '' }}>
+                                {{ $u->full_name ?: $u->name }}
+                            </option>
+                            @endforeach
+                        </select>
+                        <p class="text-xs text-slate-400 mt-1.5">Nama ini akan tampil sebagai penulis artikel.</p>
+                    </div>
+
+                    {{-- Thumbnail --}}
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                        <h3 class="text-sm font-semibold text-slate-700 mb-4">Foto Sampul</h3>
+
+                        <div id="thumbnail-preview" class="hidden mb-3">
+                            <img id="thumbnail-img" src="" alt="Pratinjau" class="w-full h-40 object-cover rounded-lg border border-slate-200">
+                        </div>
+
+                        <label for="thumbnail"
+                               class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:border-cyan-400 hover:bg-cyan-50/30 transition-colors group">
+                            <svg class="w-7 h-7 text-slate-300 group-hover:text-cyan-400 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            <p class="text-xs text-slate-400 group-hover:text-cyan-500 transition-colors font-medium">Klik untuk pilih gambar</p>
+                            <p class="text-xs text-slate-400 mt-0.5">PNG, JPG, WEBP (maks. 2MB)</p>
+                        </label>
+                        <input id="thumbnail" type="file" name="thumbnail" accept="image/*" class="hidden">
+
+                        @error('thumbnail')
+                        <p class="mt-1.5 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
                     {{-- Publish --}}
                     <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
                         <h3 class="text-sm font-semibold text-slate-700 mb-4">Penerbitan</h3>
@@ -156,42 +192,7 @@
                         </div>
                     </div>
 
-                    {{-- Penulis --}}
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
-                        <h3 class="text-sm font-semibold text-slate-700 mb-3">Penulis</h3>
-                        <select id="author_id" name="author_id"
-                            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition bg-white">
-                            @foreach($users as $u)
-                            <option value="{{ $u->id }}" {{ old('author_id', auth()->id()) == $u->id ? 'selected' : '' }}>
-                                {{ $u->full_name ?: $u->name }}
-                            </option>
-                            @endforeach
-                        </select>
-                        <p class="text-xs text-slate-400 mt-1.5">Nama ini akan tampil sebagai penulis artikel.</p>
-                    </div>
-
-                    {{-- Thumbnail --}}
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
-                        <h3 class="text-sm font-semibold text-slate-700 mb-4">Foto Sampul</h3>
-
-                        <div id="thumbnail-preview" class="hidden mb-3">
-                            <img id="thumbnail-img" src="" alt="Pratinjau" class="w-full h-40 object-cover rounded-lg border border-slate-200">
-                        </div>
-
-                        <label for="thumbnail"
-                               class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:border-cyan-400 hover:bg-cyan-50/30 transition-colors group">
-                            <svg class="w-7 h-7 text-slate-300 group-hover:text-cyan-400 mb-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                            </svg>
-                            <p class="text-xs text-slate-400 group-hover:text-cyan-500 transition-colors font-medium">Klik untuk pilih gambar</p>
-                            <p class="text-xs text-slate-400 mt-0.5">PNG, JPG, WEBP (maks. 2MB)</p>
-                        </label>
-                        <input id="thumbnail" type="file" name="thumbnail" accept="image/*" class="hidden">
-
-                        @error('thumbnail')
-                        <p class="mt-1.5 text-xs text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
+                  
 
                 </div>
             </div>

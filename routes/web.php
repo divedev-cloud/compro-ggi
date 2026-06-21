@@ -13,6 +13,7 @@ Route::get('/', fn () => view('home'))->name('home');
 Route::get('/tentang-kami', fn () => view('tentang-kami'))->name('about');
 Route::get('/program', fn () => view('program'))->name('programs');
 Route::get('/kontak', fn () => view('kontak'))->name('contact.page');
+Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index']);
 
 Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('artikel.show');
