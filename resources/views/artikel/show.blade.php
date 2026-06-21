@@ -7,7 +7,7 @@
       "headline": "{{ addslashes($article->title) }}",
       "datePublished": "{{ $article->published_at?->toIso8601String() }}",
       "dateModified": "{{ $article->updated_at->toIso8601String() }}",
-      "author": { "@@type": "Person", "name": "{{ addslashes($article->author->name ?? 'GGI') }}" },
+      "author": { "@@type": "Person", "name": "{{ addslashes($article->author?->full_name ?? $article->author?->name ?? 'GGI') }}" },
       "publisher": { "@@type": "Organization", "name": "PT Gagasan Gemilang Indonesia" }
     }
     </script>
@@ -41,7 +41,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
-                            {{ $article->author->name ?? 'Tim GGI' }}
+                            {{ $article->author?->full_name ?? $article->author?->name ?? 'Tim GGI' }}
                         </span>
                         <span class="inline-flex items-center gap-1.5 whitespace-nowrap">
                             <svg class="ml-2 w-3.5 h-3.5 text-cyan-600 flex-shrink-0" fill="none" stroke="currentColor"

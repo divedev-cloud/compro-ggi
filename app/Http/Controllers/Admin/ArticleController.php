@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -20,7 +21,9 @@ class ArticleController extends Controller
 
     public function create()
     {
-        return view('admin.articles.create');
+        $users = User::where('is_active', true)->orderBy('full_name')->orderBy('name')->get();
+
+        return view('admin.articles.create', compact('users'));
     }
 
     public function store(Request $request)
@@ -32,10 +35,11 @@ class ArticleController extends Controller
             'thumbnail'    => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'status'       => 'required|in:draft,published',
             'published_at' => 'nullable|date',
+            'author_id'    => 'nullable|exists:users,id',
         ]);
 
         $data['slug']      = $this->uniqueSlug($request->title);
-        $data['author_id'] = Auth::id();
+        $data['author_id'] = $data['author_id'] ?? Auth::id();
 
         if ($request->hasFile('thumbnail')) {
             $data['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
@@ -53,7 +57,9 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        return view('admin.articles.edit', compact('article'));
+        $users = User::where('is_active', true)->orderBy('full_name')->orderBy('name')->get();
+
+        return view('admin.articles.edit', compact('article', 'users'));
     }
 
     public function update(Request $request, Article $article)
@@ -66,6 +72,7 @@ class ArticleController extends Controller
             'remove_thumbnail' => 'nullable|boolean',
             'status'           => 'required|in:draft,published',
             'published_at'     => 'nullable|date',
+            'author_id'        => 'nullable|exists:users,id',
         ]);
 
         if ($request->boolean('remove_thumbnail') && $article->thumbnail) {
@@ -78,6 +85,10 @@ class ArticleController extends Controller
             $data['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
         } else {
             unset($data['thumbnail']);
+        }
+
+        if (empty($data['author_id'])) {
+            $data['author_id'] = $article->author_id ?? Auth::id();
         }
 
         if ($data['title'] !== $article->title) {

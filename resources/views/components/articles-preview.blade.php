@@ -1,5 +1,6 @@
 @php
     $latestArticles = \App\Models\Article::where('status', 'published')
+        ->with('author')
         ->latest('published_at')
         ->take(3)
         ->get();
@@ -54,7 +55,7 @@
 
                 {{-- Body Konten --}}
                 <div class="p-6 sm:p-7 flex flex-col flex-1">
-                    <div class="flex items-center gap-3 mb-4">
+                    <div class="flex items-center gap-3 mb-4 flex-wrap">
                         <span class="text-[0.65rem] sm:text-xs font-bold text-cyan-700 bg-cyan-500/10 px-3 py-1.5 rounded-full uppercase tracking-wider">Artikel</span>
                         <span class="text-ink-400 text-xs flex items-center gap-1.5">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -62,6 +63,12 @@
                             </svg>
                             {{ $article->published_at?->format('d M Y') }}
                         </span>
+                        @if($article->author?->full_name ?? $article->author?->name)
+                        <span class="text-ink-400 text-xs flex items-center gap-1.5">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            {{ $article->author?->full_name ?? $article->author?->name }}
+                        </span>
+                        @endif
                     </div>
 
                     <h3 class="font-display font-600 text-lg sm:text-xl text-ink-900 mb-3 line-clamp-2">

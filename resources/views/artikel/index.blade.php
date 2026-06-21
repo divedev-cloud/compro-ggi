@@ -51,9 +51,15 @@
 
                     {{-- Body --}}
                     <div class="p-6 flex flex-col flex-1">
-                        <div class="flex items-center gap-2 mb-3">
+                        <div class="flex items-center gap-2 mb-3 flex-wrap">
                             <span class="text-xs font-medium text-cyan-600 bg-cyan-500/10 px-2.5 py-1 rounded-full">Artikel</span>
                             <span class="text-ink-400 text-xs">{{ $article->published_at?->format('d M Y') }}</span>
+                            @if($article->author?->full_name ?? $article->author?->name)
+                            <span class="text-ink-400 text-xs flex items-center gap-1">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                {{ $article->author?->full_name ?? $article->author?->name }}
+                            </span>
+                            @endif
                         </div>
                         <h2 class="font-display font-600 text-lg text-ink-900 mb-2 line-clamp-2 flex-1">
                             <a href="{{ route('artikel.show', $article->slug) }}"

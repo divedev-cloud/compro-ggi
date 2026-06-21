@@ -155,6 +155,20 @@
                         </div>
                     </div>
 
+                    {{-- Penulis --}}
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                        <h3 class="text-sm font-semibold text-slate-700 mb-3">Penulis</h3>
+                        <select id="author_id" name="author_id"
+                            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition bg-white">
+                            @foreach($users as $u)
+                            <option value="{{ $u->id }}" {{ old('author_id', $article->author_id) == $u->id ? 'selected' : '' }}>
+                                {{ $u->full_name ?: $u->name }}
+                            </option>
+                            @endforeach
+                        </select>
+                        <p class="text-xs text-slate-400 mt-1.5">Nama ini akan tampil sebagai penulis artikel.</p>
+                    </div>
+
                     {{-- Thumbnail --}}
                     <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
                         <h3 class="text-sm font-semibold text-slate-700 mb-4">Foto Sampul</h3>
@@ -209,7 +223,7 @@
                             </div>
                             <div class="flex justify-between">
                                 <dt class="text-slate-500">Penulis</dt>
-                                <dd class="text-slate-700 font-medium">{{ $article->author->name ?? '—' }}</dd>
+                                <dd class="text-slate-700 font-medium">{{ $article->author?->full_name ?? $article->author?->name ?? '—' }}</dd>
                             </div>
                         </dl>
                     </div>

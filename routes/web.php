@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\ArticleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,5 +50,13 @@ Route::prefix('admin-manajemen')->name('admin.')->group(function () {
             ->except(['show'])
             ->names('articles')
             ->parameters(['artikel' => 'article']);
+
+        // User management (superadmin only — enforced in controller)
+        Route::resource('/pengguna', AdminUserController::class)
+            ->only(['index', 'create', 'store', 'edit', 'update'])
+            ->names('users')
+            ->parameters(['pengguna' => 'user']);
+        Route::patch('/pengguna/{user}/toggle', [AdminUserController::class, 'toggle'])
+            ->name('users.toggle');
     });
 });

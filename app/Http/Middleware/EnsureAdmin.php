@@ -16,6 +16,15 @@ class EnsureAdmin
                 ->with('error', 'Silakan login untuk mengakses halaman admin.');
         }
 
+        if (! Auth::user()->is_active) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('admin.login')
+                ->with('error', 'Akun Anda telah dinonaktifkan. Hubungi admin-ggi.');
+        }
+
         return $next($request);
     }
 }

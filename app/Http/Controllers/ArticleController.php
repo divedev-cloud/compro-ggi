@@ -9,6 +9,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::where('status', 'published')
+            ->with('author')
             ->latest('published_at')
             ->paginate(9);
 

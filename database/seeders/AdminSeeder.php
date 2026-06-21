@@ -12,8 +12,9 @@ class AdminSeeder extends Seeder
         User::firstOrCreate(
             ['name' => 'admin-ggi'],
             [
-                'email'    => 'admin@ggi.internal',
-                'password' => 'Sleman.21',
+                'full_name' => 'Admin GGI',
+                'email'     => 'admin@ggi.internal',
+                'password'  => 'Sleman.21',
             ]
         );
     }

@@ -79,7 +79,7 @@
                         {{ $article->published_at?->format('d M Y') ?? '—' }}
                     </td>
                     <td class="px-4 py-3.5 hidden lg:table-cell text-slate-500 text-xs">
-                        {{ $article->author->name ?? '—' }}
+                        {{ $article->author?->full_name ?? $article->author?->name ?? '—' }}
                     </td>
                     <td class="px-4 py-3.5">
                         <div class="flex items-center gap-2 justify-end">
