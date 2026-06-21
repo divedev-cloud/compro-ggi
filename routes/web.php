@@ -18,11 +18,20 @@ Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index
 Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('artikel.show');
 
 Route::post('/contact', function (Request $request) {
-    $request->validate([
+    $validated = $request->validate([
         'name'    => 'required|string|max:255',
+        'org'     => 'nullable|string|max:255',
         'email'   => 'required|email|max:255',
+        'phone'   => 'nullable|string|max:255',
+        'topic'   => 'nullable|string|max:255',
         'message' => 'required|string',
     ]);
+
+    \App\Models\Contact::create($validated);
+
+    if ($request->wantsJson() || $request->ajax()) {
+        return response()->json(['message' => 'Pesan terkirim! Tim kami akan segera menghubungi Anda.']);
+    }
 
     return back()->with('success', 'Pesan terkirim! Tim kami akan segera menghubungi Anda.');
 })->name('contact.send');
@@ -58,5 +67,11 @@ Route::prefix('admin-manajemen')->name('admin.')->group(function () {
             ->parameters(['pengguna' => 'user']);
         Route::patch('/pengguna/{user}/toggle', [AdminUserController::class, 'toggle'])
             ->name('users.toggle');
+
+        // Contact Management
+        Route::resource('/kontak', \App\Http\Controllers\Admin\ContactController::class)
+            ->only(['index', 'show', 'update', 'destroy'])
+            ->names('contacts')
+            ->parameters(['kontak' => 'contact']);
     });
 });

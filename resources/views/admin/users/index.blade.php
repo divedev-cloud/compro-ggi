@@ -1,13 +1,13 @@
 <x-admin.layouts.app title="Kelola Pengguna" subtitle="Tambah dan kelola akun admin website">
 
     {{-- Header --}}
-    <div class="flex items-center justify-between mb-6">
-        <div class="bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm text-slate-600 shadow-sm">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div class="bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm text-slate-600 shadow-sm w-full sm:w-auto text-center">
             <span class="font-semibold text-slate-900">{{ $users->count() }}</span> pengguna
         </div>
         @if(auth()->user()?->isSuperAdmin())
         <a href="{{ route('admin.users.create') }}"
-           class="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-medium px-4 py-2.5 rounded-lg transition-colors shadow-sm">
+           class="inline-flex items-center justify-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-medium px-4 py-2.5 rounded-lg transition-colors shadow-sm w-full sm:w-auto">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
@@ -18,7 +18,8 @@
 
     {{-- Table --}}
     <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <table class="w-full text-sm">
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
             <thead>
                 <tr class="border-b border-slate-200 bg-slate-50/60">
                     <th class="text-left font-semibold text-slate-600 px-5 py-3.5">Username</th>
@@ -103,6 +104,7 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
     </div>
 
 </x-admin.layouts.app>

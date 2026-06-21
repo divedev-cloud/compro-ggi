@@ -135,16 +135,71 @@
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
                     </button>
 
-                    <!-- Pesan Sukses -->
-                    @if(session('success'))
-                    <p class="mt-4 text-sm text-cyan-700 flex items-center gap-2">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m22 4-10 10-3-3"/></svg>
-                        {{ session('success') }}
-                    </p>
-                    @endif
+                    <!-- Tempat Pesan Notifikasi -->
+                    <p id="form-message" class="hidden mt-4 text-sm flex items-center gap-2"></p>
                 </form>
             </div>
 
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form');
+    const msgDiv = document.getElementById('form-message');
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    if(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const originalBtnHtml = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span>Mengirim...</span>';
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+            
+            msgDiv.classList.add('hidden');
+            msgDiv.className = 'hidden mt-4 text-sm flex items-center gap-2';
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                },
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) throw response;
+                return response.json();
+            })
+            .then(data => {
+                msgDiv.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m22 4-10 10-3-3"/></svg> ${data.message || 'Pesan berhasil terkirim!'}`;
+                msgDiv.classList.remove('hidden', 'text-red-600');
+                msgDiv.classList.add('text-cyan-700');
+                form.reset();
+            })
+            .catch(async error => {
+                let errorMsg = 'Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.';
+                if (error.json) {
+                    try {
+                        const errData = await error.json();
+                        errorMsg = errData.message || errorMsg;
+                    } catch(e) {}
+                }
+                msgDiv.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> ${errorMsg}`;
+                msgDiv.classList.remove('hidden', 'text-cyan-700');
+                msgDiv.classList.add('text-red-600');
+            })
+            .finally(() => {
+                submitBtn.innerHTML = originalBtnHtml;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+            });
+        });
+    }
+});
+</script>
