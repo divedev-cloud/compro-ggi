@@ -6,6 +6,7 @@
     <x-hero />
     <x-about-preview />
     <x-programs-preview />
+    <x-articles-preview />
     <x-why-ggi />
     <x-partners />
     <x-contact />

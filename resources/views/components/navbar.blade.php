@@ -133,6 +133,8 @@
             </div>
 
             <a href="{{ route('home') }}#partners" class="nav-link">Mitra</a>
+            <a href="{{ route('artikel.index') }}"
+                class="nav-link {{ request()->routeIs('artikel.*') ? 'text-cyan-600 font-semibold' : '' }}">Artikel</a>
             <a href="{{ route('contact.page') }}"
                 class="nav-link {{ request()->routeIs('contact.page') ? 'text-cyan-600 font-semibold' : '' }}">Kontak</a>
         </div>
@@ -161,6 +163,7 @@
     <a href="{{ route('about') }}" class="font-display text-2xl font-600 text-ink-900">Tentang Kami</a>
     <a href="{{ route('programs') }}" class="font-display text-2xl font-600 text-ink-900">Program</a>
     <a href="{{ route('home') }}#partners" class="font-display text-2xl font-600 text-ink-900">Mitra</a>
+    <a href="{{ route('artikel.index') }}" class="font-display text-2xl font-600 text-ink-900">Artikel</a>
     <a href="{{ route('contact.page') }}" class="font-display text-2xl font-600 text-ink-900">Kontak</a>
     <a href="{{ route('contact.page') }}" class="btn-primary mt-4">Hubungi Kami</a>
 </div>

@@ -3456,3 +3456,88 @@ button:focus-visible {
   padding-top: 8rem;
   padding-bottom: clamp(2.5rem, 5vw, 4rem);
 }
+
+/* ===================================================================
+   Article content — prose styles for Quill-generated HTML
+=================================================================== */
+.article-content {
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--ink-700, #3d4f6e);
+}
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4 {
+  font-family: var(--font-display, sans-serif);
+  font-weight: 700;
+  color: var(--ink-900, #0f1b33);
+  line-height: 1.25;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.article-content h1 { font-size: 2rem; }
+.article-content h2 { font-size: 1.5rem; }
+.article-content h3 { font-size: 1.25rem; }
+.article-content h4 { font-size: 1.1rem; }
+.article-content p  { margin-bottom: 1.25rem; }
+.article-content ul,
+.article-content ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.6rem;
+}
+.article-content ul { list-style-type: disc; }
+.article-content ol { list-style-type: decimal; }
+.article-content li { margin-bottom: 0.4rem; }
+.article-content blockquote {
+  border-left: 3px solid var(--cyan-500, #22d3ee);
+  padding: 0.75rem 1.25rem;
+  margin: 1.75rem 0;
+  background: rgba(34,211,238,0.05);
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: italic;
+  color: var(--ink-600, #4a5f80);
+}
+.article-content pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 1.1rem 1.25rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+.article-content code {
+  background: rgba(15,27,51,0.06);
+  color: #0f1b33;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.3rem;
+  font-size: 0.875em;
+}
+.article-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1.75rem auto;
+  display: block;
+}
+.article-content a {
+  color: #06b6d4;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-content a:hover { color: #0891b2; }
+.article-content strong { font-weight: 700; color: var(--ink-900, #0f1b33); }
+.article-content em     { font-style: italic; }
+.article-content hr {
+  border: none;
+  border-top: 1px solid var(--ink-100, #e8ecf4);
+  margin: 2rem 0;
+}

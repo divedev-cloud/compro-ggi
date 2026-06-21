@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\ArticleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,9 @@ Route::get('/', fn () => view('home'))->name('home');
 Route::get('/tentang-kami', fn () => view('tentang-kami'))->name('about');
 Route::get('/program', fn () => view('program'))->name('programs');
 Route::get('/kontak', fn () => view('kontak'))->name('contact.page');
+
+Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index');
+Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('artikel.show');
 
 Route::post('/contact', function (Request $request) {
     $request->validate([
@@ -38,10 +42,10 @@ Route::prefix('admin-manajemen')->name('admin.')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
         // Image upload for rich text editor
-        Route::post('/upload-gambar', [ArticleController::class, 'uploadImage'])->name('upload-image');
+        Route::post('/upload-gambar', [AdminArticleController::class, 'uploadImage'])->name('upload-image');
 
         // Articles CRUD
-        Route::resource('/artikel', ArticleController::class)
+        Route::resource('/artikel', AdminArticleController::class)
             ->except(['show'])
             ->names('articles')
             ->parameters(['artikel' => 'article']);
