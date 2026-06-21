@@ -2,6 +2,7 @@
     'title'       => '',
     'subtitle'    => '',
     'breadcrumbs' => [],
+    'titleClass'  => 'text-4xl sm:text-5xl lg:text-6xl',
 ])
 
 @if(count($breadcrumbs) > 0)
@@ -31,15 +32,15 @@
                 <li>
                     <a href="{{ route('home') }}" class="hover:text-cyan-600 transition-colors">Beranda</a>
                 </li>
-                @foreach($breadcrumbs as $crumb)
+                @foreach($breadcrumbs as $i => $crumb)
                 <li aria-hidden="true">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                 </li>
-                <li>
+                <li @if($i === array_key_last($breadcrumbs) && strlen($crumb['label']) > 40) class="max-w-[180px] sm:max-w-xs truncate" @endif>
                     @if(isset($crumb['url']))
                         <a href="{{ $crumb['url'] }}" class="hover:text-cyan-600 transition-colors">{{ $crumb['label'] }}</a>
                     @else
-                        <span class="text-ink-900 font-medium">{{ $crumb['label'] }}</span>
+                        <span class="text-ink-900 font-medium">{{ Str::limit($crumb['label'], 40) }}</span>
                     @endif
                 </li>
                 @endforeach
@@ -47,7 +48,7 @@
         </nav>
 
         {{-- Heading --}}
-        <h1 class="font-display font-700 text-4xl sm:text-5xl lg:text-6xl leading-[1.1] mb-4 reveal">{!! $title !!}</h1>
+        <h1 class="font-display font-700 {{ $titleClass }} leading-[1.15] mb-4 reveal">{!! $title !!}</h1>
 
         @if($subtitle)
         <p class="text-ink-500 text-base sm:text-lg max-w-2xl leading-relaxed reveal">{{ $subtitle }}</p>

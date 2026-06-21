@@ -3131,6 +3131,15 @@ body {
   transform: translateX(0);
 }
 
+/* Di mobile (single column), horizontal slide diganti vertical fade
+   agar elemen tidak terpotong oleh overflow-hidden section */
+@media (max-width: 1023px) {
+  .reveal-left  { transform: translateY(30px); }
+  .reveal-right { transform: translateY(30px); }
+  .reveal-left.in-view,
+  .reveal-right.in-view { transform: translateY(0); }
+}
+
 /* ===================================================================
    Section dividers / structure
 =================================================================== */
