@@ -17,6 +17,8 @@
 <link rel="canonical" href="{{ url()->current() }}" />
 @endif
 
+<meta name="google-site-verification" content="kzpncin2b7OeALBCOEjgqM1ajZItJ8pHEz1ufvdLb6M" />
+
 {{-- Open Graph --}}
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="PT Gagasan Gemilang Indonesia" />

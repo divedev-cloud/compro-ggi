@@ -22,12 +22,13 @@
         <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
 
             <div class="lg:col-span-7">
-                <div class="hero-reveal reveal mb-6 lg:mb-7" style="transition-delay:0ms">
+                <!-- <div class="hero-reveal reveal mb-6 lg:mb-7" style="transition-delay:0ms">
                     <span class="pill"><span class="pill-dot"></span>Konsultan Pengembangan Ekonomi Lokal</span>
-                </div>
+                </div> -->
 
-                <h1 class="hero-reveal reveal font-display font-700 text-[1.8rem] min-[400px]:text-4xl sm:text-5xl lg:text-[4.1rem] leading-[1.25] lg:leading-[1.05] text-balance mb-6 lg:mb-7">
-                    <span class="text-ink-900">Dari Gagasan Menjadi </span><span class="text-gradient-aurora">Gerakan</span><br/>
+                <h1 class="hero-reveal reveal font-display font-700 text-4xl min-[400px]:text-5xl sm:text-6xl lg:text-[4.5rem] leading-[1.2] lg:leading-[1.05] text-balance mb-6 lg:mb-7">
+                    <span class="text-ink-900">Dari Gagasan</span><br/>
+                    <span class="text-gradient-aurora">Menjadi Gerakan</span><br/>
                     <span class="text-gradient-gold">Menjadi Dampak.</span>
                 </h1>
 

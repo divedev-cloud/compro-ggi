@@ -199,7 +199,7 @@
 
             <div class="glass-card p-8 text-center reveal-scale flex flex-col items-center justify-center" data-delay="240" data-tilt>
                 <div class="team-photo-ring w-28 h-28 mx-auto mb-6 shrink-0">
-                    <img src="{{ asset('assets/team-dimas.png') }}" alt="Foto Dimas Panji A. Rohmatulloh" loading="lazy" class="w-full h-full object-cover rounded-full" />
+                    <img src="{{ asset('assets/team-dimas-new.png') }}" alt="Foto Dimas Panji A. Rohmatulloh" loading="lazy" class="w-full h-full object-cover rounded-full" />
                 </div>
                 <h3 class="font-display font-600 text-ink-900 text-lg mb-2">Dimas Panji A. R</h3>
                 <p class="text-violet-700 text-xs font-bold mb-3 uppercase tracking-wider">Research &amp; Impact</p>
