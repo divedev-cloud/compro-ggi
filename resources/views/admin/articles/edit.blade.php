@@ -169,6 +169,24 @@
                         <p class="text-xs text-slate-400 mt-1.5">Nama ini akan tampil sebagai penulis artikel.</p>
                     </div>
 
+                    {{-- Kategori / Seri --}}
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                        <h3 class="text-sm font-semibold text-slate-700 mb-3">Seri / Kategori Artikel</h3>
+                        <input type="text" name="category_name" list="category-list" 
+                               value="{{ old('category_name', $article->category?->name) }}"
+                               class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition" 
+                               placeholder="Pilih atau ketik baru..." autocomplete="off">
+                        <datalist id="category-list">
+                            @foreach($categories as $category)
+                                <option value="{{ $category->name }}"></option>
+                            @endforeach
+                        </datalist>
+                        <p class="text-xs text-slate-400 mt-1.5">Jika bagian dari seri artikel, ketik atau pilih judul utama seri ini.</p>
+                        @error('category_name')
+                        <p class="mt-1.5 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     {{-- Thumbnail --}}
                     <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
                         <h3 class="text-sm font-semibold text-slate-700 mb-4">Foto Sampul</h3>

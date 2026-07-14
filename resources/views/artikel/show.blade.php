@@ -27,6 +27,11 @@
                     {{-- Meta bar --}}
                     <div
                         class="flex flex-wrap items-center gap-x-10 gap-y-2 text-xs sm:text-sm text-ink-500 mb-8 pb-6 border-b border-ink-100">
+                        @if($article->category)
+                        <span class="inline-flex items-center gap-1.5 whitespace-nowrap text-violet-600 bg-violet-50/50 px-2.5 py-1 rounded-md font-medium border border-violet-100">
+                            {{ $article->category->name }}
+                        </span>
+                        @endif
                         <span class="inline-flex items-center gap-1.5 whitespace-nowrap">
                             <svg class="w-3.5 h-3.5 text-cyan-600 flex-shrink-0" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">

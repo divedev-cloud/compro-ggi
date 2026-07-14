@@ -16,6 +16,7 @@ class Article extends Model
         'status',
         'published_at',
         'author_id',
+        'article_category_id',
     ];
 
     protected function casts(): array
@@ -28,5 +29,10 @@ class Article extends Model
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(ArticleCategory::class, 'article_category_id');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,8 +23,9 @@ class ArticleController extends Controller
     public function create()
     {
         $users = User::where('is_active', true)->orderBy('full_name')->orderBy('name')->get();
+        $categories = ArticleCategory::orderBy('name')->get();
 
-        return view('admin.articles.create', compact('users'));
+        return view('admin.articles.create', compact('users', 'categories'));
     }
 
     public function store(Request $request)
@@ -36,10 +38,20 @@ class ArticleController extends Controller
             'status'       => 'required|in:draft,published',
             'published_at' => 'nullable|date',
             'author_id'    => 'nullable|exists:users,id',
+            'category_name'=> 'nullable|string|max:255',
         ]);
 
         $data['slug']      = $this->uniqueSlug($request->title);
         $data['author_id'] = $data['author_id'] ?? Auth::id();
+
+        if (!empty($data['category_name'])) {
+            $category = ArticleCategory::firstOrCreate(
+                ['name' => $data['category_name']],
+                ['slug' => Str::slug($data['category_name']) ?: 'kategori-' . time()]
+            );
+            $data['article_category_id'] = $category->id;
+        }
+        unset($data['category_name']);
 
         if ($request->hasFile('thumbnail')) {
             $data['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
@@ -58,8 +70,9 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         $users = User::where('is_active', true)->orderBy('full_name')->orderBy('name')->get();
+        $categories = ArticleCategory::orderBy('name')->get();
 
-        return view('admin.articles.edit', compact('article', 'users'));
+        return view('admin.articles.edit', compact('article', 'users', 'categories'));
     }
 
     public function update(Request $request, Article $article)
@@ -73,6 +86,7 @@ class ArticleController extends Controller
             'status'           => 'required|in:draft,published',
             'published_at'     => 'nullable|date',
             'author_id'        => 'nullable|exists:users,id',
+            'category_name'    => 'nullable|string|max:255',
         ]);
 
         if ($request->boolean('remove_thumbnail') && $article->thumbnail) {
@@ -86,6 +100,17 @@ class ArticleController extends Controller
         } else {
             unset($data['thumbnail']);
         }
+
+        if (!empty($data['category_name'])) {
+            $category = ArticleCategory::firstOrCreate(
+                ['name' => $data['category_name']],
+                ['slug' => Str::slug($data['category_name']) ?: 'kategori-' . time()]
+            );
+            $data['article_category_id'] = $category->id;
+        } else {
+            $data['article_category_id'] = null;
+        }
+        unset($data['category_name']);
 
         if (empty($data['author_id'])) {
             $data['author_id'] = $article->author_id ?? Auth::id();

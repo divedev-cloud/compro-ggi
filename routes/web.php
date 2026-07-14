@@ -16,6 +16,7 @@ Route::get('/kontak', fn () => view('kontak'))->name('contact.page');
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index']);
 
 Route::get('/artikel', [ArticleController::class, 'index'])->name('artikel.index');
+Route::get('/artikel/kategori/{slug}', [ArticleController::class, 'category'])->name('artikel.category');
 Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('artikel.show');
 
 Route::post('/contact', function (Request $request) {
