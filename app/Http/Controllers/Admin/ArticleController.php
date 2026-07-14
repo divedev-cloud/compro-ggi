@@ -58,9 +58,7 @@ class ArticleController extends Controller
 
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
-            $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('thumbnails'), $filename);
-            $data['thumbnail'] = 'thumbnails/' . $filename;
+            $data['thumbnail'] = 'data:image/' . $file->getClientOriginalExtension() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
         }
 
         if ($data['status'] === 'published' && empty($data['published_at'])) {
@@ -95,19 +93,11 @@ class ArticleController extends Controller
             'category_name'    => 'nullable|string|max:255',
         ]);
 
-        if ($request->boolean('remove_thumbnail') && $article->thumbnail) {
-            if (file_exists(public_path($article->thumbnail))) {
-                unlink(public_path($article->thumbnail));
-            }
+        if ($request->boolean('remove_thumbnail')) {
             $data['thumbnail'] = null;
         } elseif ($request->hasFile('thumbnail')) {
-            if ($article->thumbnail && file_exists(public_path($article->thumbnail))) {
-                unlink(public_path($article->thumbnail));
-            }
             $file = $request->file('thumbnail');
-            $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('thumbnails'), $filename);
-            $data['thumbnail'] = 'thumbnails/' . $filename;
+            $data['thumbnail'] = 'data:image/' . $file->getClientOriginalExtension() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
         } else {
             unset($data['thumbnail']);
         }
@@ -143,10 +133,6 @@ class ArticleController extends Controller
 
     public function destroy(Article $article)
     {
-        if ($article->thumbnail && file_exists(public_path($article->thumbnail))) {
-            unlink(public_path($article->thumbnail));
-        }
-
         $article->delete();
 
         return redirect()->route('admin.articles.index')
