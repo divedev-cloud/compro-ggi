@@ -1,4 +1,4 @@
-<x-layouts.app :title="$article->title . ' | GGI'" :description="$article->excerpt ?: strip_tags(substr($article->content, 0, 160))" :canonical="url('/artikel/' . $article->slug)" :ogImage="$article->thumbnail ? asset('storage/' . $article->thumbnail) : null">
+<x-layouts.app :title="$article->title . ' | GGI'" :description="$article->excerpt ?: strip_tags(substr($article->content, 0, 160))" :canonical="url('/artikel/' . $article->slug)" :ogImage="$article->thumbnail ? $article->thumbnail : null">
     @push('schema')
         <script type="application/ld+json">
     {
@@ -115,7 +115,7 @@
                                     <a href="{{ route('artikel.show', $other->slug) }}"
                                         class="flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden bg-gradient-to-br from-cyan-500/10 to-violet-500/10">
                                         @if ($other->thumbnail)
-                                            <img src="{{ asset('storage/' . $other->thumbnail) }}"
+                                            <img src="{{ $other->thumbnail }}"
                                                 alt="{{ $other->title }}" loading="lazy"
                                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                                         @else
