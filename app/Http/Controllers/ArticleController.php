@@ -9,7 +9,8 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::where('status', 'published')
+        $articles = Article::select('id', 'title', 'slug', 'excerpt', 'thumbnail', 'status', 'published_at', 'author_id', 'article_category_id', 'created_at')
+            ->where('status', 'published')
             ->with(['author', 'category'])
             ->latest('published_at')
             ->paginate(9);
@@ -25,7 +26,8 @@ class ArticleController extends Controller
     {
         $category = ArticleCategory::where('slug', $slug)->firstOrFail();
 
-        $articles = Article::where('status', 'published')
+        $articles = Article::select('id', 'title', 'slug', 'excerpt', 'thumbnail', 'status', 'published_at', 'author_id', 'article_category_id', 'created_at')
+            ->where('status', 'published')
             ->where('article_category_id', $category->id)
             ->with(['author', 'category'])
             ->latest('published_at')
@@ -48,7 +50,8 @@ class ArticleController extends Controller
         $wordCount   = str_word_count(strip_tags($article->content));
         $readingTime = max(1, ceil($wordCount / 200));
 
-        $otherArticles = Article::where('status', 'published')
+        $otherArticles = Article::select('id', 'title', 'slug', 'excerpt', 'thumbnail', 'status', 'published_at', 'author_id', 'article_category_id', 'created_at')
+            ->where('status', 'published')
             ->where('id', '!=', $article->id)
             ->latest('published_at')
             ->take(3)

@@ -15,7 +15,10 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::with('author')->latest()->paginate(15);
+        $articles = Article::select('id', 'title', 'slug', 'status', 'published_at', 'thumbnail', 'author_id', 'article_category_id', 'created_at', 'updated_at')
+            ->with('author')
+            ->latest()
+            ->paginate(15);
 
         return view('admin.articles.index', compact('articles'));
     }

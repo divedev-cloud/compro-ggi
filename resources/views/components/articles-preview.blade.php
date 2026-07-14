@@ -1,5 +1,6 @@
 @php
-    $latestArticles = \App\Models\Article::where('status', 'published')
+    $latestArticles = \App\Models\Article::select('id', 'title', 'slug', 'excerpt', 'thumbnail', 'status', 'published_at', 'author_id', 'article_category_id', 'created_at')
+        ->where('status', 'published')
         ->with(['author', 'category'])
         ->latest('published_at')
         ->take(3)
