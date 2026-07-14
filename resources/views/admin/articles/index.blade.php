@@ -48,7 +48,7 @@
                 <tr class="hover:bg-slate-50/50 transition-colors">
                     <td class="px-5 py-3.5">
                         @if($article->thumbnail)
-                        <img src="{{ asset('storage/' . $article->thumbnail) }}"
+                        <img src="{{ asset($article->thumbnail) }}"
                              alt="{{ $article->title }}"
                              class="w-10 h-10 rounded-lg object-cover border border-slate-200">
                         @else

@@ -57,7 +57,10 @@ class ArticleController extends Controller
         unset($data['category_name']);
 
         if ($request->hasFile('thumbnail')) {
-            $data['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
+            $file = $request->file('thumbnail');
+            $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('thumbnails'), $filename);
+            $data['thumbnail'] = 'thumbnails/' . $filename;
         }
 
         if ($data['status'] === 'published' && empty($data['published_at'])) {
@@ -93,13 +96,18 @@ class ArticleController extends Controller
         ]);
 
         if ($request->boolean('remove_thumbnail') && $article->thumbnail) {
-            Storage::disk('public')->delete($article->thumbnail);
+            if (file_exists(public_path($article->thumbnail))) {
+                unlink(public_path($article->thumbnail));
+            }
             $data['thumbnail'] = null;
         } elseif ($request->hasFile('thumbnail')) {
-            if ($article->thumbnail) {
-                Storage::disk('public')->delete($article->thumbnail);
+            if ($article->thumbnail && file_exists(public_path($article->thumbnail))) {
+                unlink(public_path($article->thumbnail));
             }
-            $data['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
+            $file = $request->file('thumbnail');
+            $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('thumbnails'), $filename);
+            $data['thumbnail'] = 'thumbnails/' . $filename;
         } else {
             unset($data['thumbnail']);
         }
@@ -135,8 +143,8 @@ class ArticleController extends Controller
 
     public function destroy(Article $article)
     {
-        if ($article->thumbnail) {
-            Storage::disk('public')->delete($article->thumbnail);
+        if ($article->thumbnail && file_exists(public_path($article->thumbnail))) {
+            unlink(public_path($article->thumbnail));
         }
 
         $article->delete();
@@ -149,9 +157,11 @@ class ArticleController extends Controller
     {
         $request->validate(['image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:4096']);
 
-        $path = $request->file('image')->store('content-images', 'public');
+        $file = $request->file('image');
+        $filename = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('content-images'), $filename);
 
-        return response()->json(['url' => Storage::url($path)]);
+        return response()->json(['url' => asset('content-images/' . $filename)]);
     }
 
     private function uniqueSlug(string $title, ?int $excludeId = null): string

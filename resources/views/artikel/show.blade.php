@@ -61,7 +61,7 @@
                     {{-- Thumbnail besar --}}
                     @if ($article->thumbnail)
                         <div class="rounded-2xl overflow-hidden mb-10 reveal">
-                            <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="{{ $article->title }}"
+                            <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}"
                                 class="w-full object-cover max-h-[480px]">
                         </div>
                     @endif

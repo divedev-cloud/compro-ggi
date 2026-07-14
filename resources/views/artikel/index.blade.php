@@ -60,7 +60,7 @@
                             <a href="{{ route('artikel.show', $article->slug) }}"
                                class="block aspect-[16/9] overflow-hidden bg-gradient-to-br from-cyan-900/20 to-violet-900/20 flex-shrink-0">
                                 @if($article->thumbnail)
-                                <img src="{{ asset('storage/' . $article->thumbnail) }}"
+                                <img src="{{ asset($article->thumbnail) }}"
                                      alt="{{ $article->title }}"
                                      class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
                                 @else
